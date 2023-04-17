@@ -23,9 +23,6 @@ module.exports = () => {
         title: "markdown"
       }),
       
-    new CopyWebpackPlugin({
-      patterns: [{ from: "favicon.ico", to: "favicon.ico" }],
-    }),
 
     new InjectManifest({
       swSrc: "./src-sw.js",
@@ -55,7 +52,7 @@ module.exports = () => {
     module: {
       rules: [
         {
-          test: /\.scc$/i,
+          test: /\.css$/i,
           use: ["style-loader", "scc-loader"],
         },
         {
@@ -64,11 +61,7 @@ module.exports = () => {
           use: {
             loader: "bable-loader",
             options: {
-              presets: ["@bable/preset.env"],
-              plugins: [
-                "@babel/plugin-proposal-object-rest-spread",
-                "@babel/transform-runtime",
-              ]
+              presets: ["@bable/preset.env"]
             }
           }
         }
