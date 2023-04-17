@@ -29,9 +29,9 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 // TODO: Implement asset caching
 registerRoute(
   ({ request }) => ["style", "script", "worker"].includes(request.destination),
-  // default cache for assets
+  // static cache
   new StaleWhileRevalidate({
-    cacheName: "asset-cache",
+    cacheName: "static-resources",
     plugins: [
       //adding max age cache
       new CacheableResponsePlugin({

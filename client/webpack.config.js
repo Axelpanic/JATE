@@ -58,7 +58,7 @@ module.exports = () => {
           test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
-            loader: "bable-loader",
+            loader: "babel-loader",
             options: {
               presets: ["@bable/preset.env"],
               plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
