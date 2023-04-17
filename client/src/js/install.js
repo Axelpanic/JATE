@@ -2,49 +2,29 @@ const butInstall = document.getElementById('buttonInstall');
 
 // Logic for installing the PWA
 
-// Check onload to see if the app is supported
-window.addEventListener("load", () => {
-    if (!installSupported()) {
-      console.log("Install is not supported");
-      hideInstallButton();
-      return;
-    }
-  
-    console.log("Install is supported");
-    window.addEventListener("beforeinstallprompt", (event) => {
-      window.deferredPrompt = event;
-      showInstallButton(event);
-    });
-  
-    butInstall.addEventListener("click", async () => {
-      const promptEvent = window.deferredPrompt;
-  
-      if (!promptEvent) {
-        return;
-      }
-  
-      // Show prompt
-      promptEvent.prompt();
-  
-      window.deferredPrompt = null;
-    });
-  
-    // Hide the install button
-    window.addEventListener("appinstalled", (event) => {
-      hideInstallButton();
-      window.deferredPrompt = null;
-    });
-  });
-  
-  /** Checks to see if install is supported in browser */
-  function installSupported() {
-    return "getInstalledRelatedApps" in navigator;
+// TODO: Add an event handler to the `beforeinstallprompt` event
+window.addEventListener("beforeinstallprompt", (event) => {
+  window.deferredPrompt = event;
+  butInstall.classList.toggle("hidden", false);
+});
+
+// TODO: Implement a click event handler on the `butInstall` element
+butInstall.addEventListener("click", async () => {
+  const promptEvent = window.deferredPrompt;
+
+  if (!promptEvent) {
+    return;
   }
 
-  function showInstallButton(event) {
-    window.deferredPrompt = event;
-    butInstall.classList.toggle("hidden", false);
-  }
-  function hideInstallButton() {
-    butInstall.classList.toggle("hidden", true);
-  }
+  promptEvent.prompt();
+
+  window.deferredPrompt = null;
+
+  butInstall.classList.toggle("hidden", true);
+});
+
+// TODO: Add an handler for the `appinstalled` event
+window.addEventListener("appinstalled", (event) => {
+  console.log("install hit");
+  window.deferredPrompt = null;
+});

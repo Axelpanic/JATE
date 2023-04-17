@@ -29,13 +29,19 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 // TODO: Implement asset caching
 registerRoute(
   ({ request }) => ["style", "script", "worker"].includes(request.destination),
+  // default cache for assets
   new StaleWhileRevalidate({
-    cacheName: "static-resources",
+    cacheName: "asset-cache",
     plugins: [
+      //adding max age cache
       new CacheableResponsePlugin({
         statuses: [0, 200],
       }),
+      //max age set to 30 days
+      new ExpirationPlugin({
+        maxEntries: 100,
+        maxAgeSeconds: 30 * 24 *60 *60, //30 days
+      })
     ],
   })
 );
-''
