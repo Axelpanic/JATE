@@ -22,9 +22,7 @@ User story:
 
 ## Usage
 
-Video showing install:
-
-Heroku link:
+Heroku link: (https://jate-app-challege.herokuapp.com/)
 
 ![screenshot image](screenshots/JATE_app.png)
 
